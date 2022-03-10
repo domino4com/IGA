@@ -1,3 +1,5 @@
+<img src="assets/IGA.svg" width=200 align="right">
+
 # IGA - Input Gas Air Quality
 This is a Gas Sensor measuring Total Volatile Organic Compounds and estimating Carbon dioxide (CO₂eq) 
 | Specifications | |
