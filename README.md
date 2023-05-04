@@ -9,6 +9,7 @@ This is a Gas Sensor measuring Total Volatile Organic Compounds and estimating C
 | ChipSet | Sensirion SGP30|
 | Datasheet | [.pdf](https://sensirion.com/media/documents/984E0DD5/61644B8B/Sensirion_Gas_Sensors_Datasheet_SGP30.pdf) |
 | Suggested Arduino Library | [GitHub](https://github.com/sparkfun/SparkFun_SGP30_Arduino_Library) |
+| Suggested MicroPython Library | [GitHub](https://github.com/adafruit/Adafruit_CircuitPython_SGP30)|
 | TVOC Accuracy | 1 ppb |
 | TVOC Range | 0 to 60000 ppb|
 | CO₂eq Accuracy | 1 ppm |
