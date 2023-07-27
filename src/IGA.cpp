@@ -31,7 +31,7 @@ bool IGA::readData(uint16_t data[], uint8_t numWords) {
     for (uint8_t i = 0; i < numWords; ++i) {
         uint8_t msb = Wire.read();
         uint8_t lsb = Wire.read();
-        uint8_t crc = Wire.read();  // Checksum byte, not used
+        Wire.read();  // Checksum byte, not used
 
         data[i] = ((uint16_t)msb << 8) | lsb;
     }
