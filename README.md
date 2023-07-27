@@ -1,5 +1,9 @@
 <img src="assets/IGA.svg" width=200 align="right">
 
+
+[![PlatformIO](https://github.com/domino4com/IGA/actions/workflows/platformio.yml/badge.svg)](https://github.com/domino4com/IGA/actions/workflows/platformio.yml)
+[![Arduino](https://github.com/domino4com/IGA/actions/workflows/arduino.yml/badge.svg)](https://github.com/domino4com/IGA/actions/workflows/arduino.yml)
+
 # IGA - Input Gas Air Quality
 This is a Gas Sensor measuring Total Volatile Organic Compounds and estimating Carbon dioxide (CO₂eq) 
 | Specifications | |

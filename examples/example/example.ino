@@ -1,32 +1,39 @@
 #include <Wire.h>
+#ifndef I2C_SDA
+#define I2C_SDA SDA
+#endif
+#ifndef I2C_SCL
+#define I2C_SCL SCL
+#endif
 
-#include "IGA.h"
-IGA iga;
+// Specifics
+#include <IGA.h>
+IGA input;
+uint16_t var1, var2;
+char s[] = "CO2 concentration: %d ppm, TVOC concentration: %d ppb\n";
 
 void setup() {
     Serial.begin(115200);
     delay(1000);
-    Serial.printf("\nIGA Test\n");
+    Serial.printf("\nIGA Example Test\n");
 
     Wire.setPins(I2C_SDA, I2C_SCL);
     Wire.begin();
 
-    if (iga.begin()) {
-        Serial.println("IGA sensor initialized successfully.");
+    if (input.begin()) {
+        Serial.println("IGA initialized successfully.");
     } else {
-        Serial.println("Failed to initialize IGA sensor!");
+        Serial.println("Failed to initialize IGA");
         exit(0);
     }
 }
 
 void loop() {
-    uint16_t co2, tvoc;
-
-    if (iga.getData(co2, tvoc)) {
-        Serial.printf("CO2 concentration: %d ppm, TVOC concentration: %d ppb\n", co2, tvoc);
+    if (input.getData(var1, var2)) {
+        Serial.printf(s, var1, var2);
     } else {
-        Serial.println("Failed to IGA data.");
+        Serial.println("Failed to get IGA data.");
     }
 
-    delay(2000);
+    delay(1000);
 }
