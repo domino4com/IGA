@@ -4,7 +4,14 @@ name: Documentation
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - develop
+      - main
+  pull_request:
+  release:
+    types:
+      - created
 
 jobs:
   build-documentation:
