@@ -1,8 +1,10 @@
 #ifndef IGA_H
 #define IGA_H
 
+#include "xbm.h"
 #include <Wire.h>
 #include <ArduinoJson.h>
+
 
 class IGA {
 public:
@@ -14,6 +16,8 @@ public:
 private:
     void writeCommand(uint16_t command);
     bool readData(uint16_t data[], uint8_t numWords);
+    bool wireping(uint8_t address);
+    bool uninitialized = true;
 };
 
 #endif // IGA_H

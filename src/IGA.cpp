@@ -25,6 +25,13 @@ void IGA::writeCommand(uint16_t command) {
     Wire.endTransmission();
 }
 
+bool IGA::wireping(uint8_t address) {
+    Wire.beginTransmission(address);
+    byte error = Wire.endTransmission();
+    if (error == 0) return true;
+    return false;
+}
+
 bool IGA::readData(uint16_t data[], uint8_t numWords) {
     Wire.requestFrom(SGP30_I2C_ADDRESS, numWords * 3);  // SGP30 returns 3 bytes for each 16-bit word
 
@@ -53,6 +60,16 @@ bool IGA::getData(uint16_t &co2, uint16_t &tvoc) {
 }
 
 bool IGA::getJSON(JsonObject &doc) {
+    if (!wireping(SGP30_I2C_ADDRESS)) {
+        uninitialized = true;
+        return false;
+    }
+    if (uninitialized) {
+        uninitialized = false;
+        begin();
+        Serial.println("IGA: First time");
+    }
+
     writeCommand(SGP30_MEASURE_CMD);
     delay(12);  // Measurement delay for SGP30
 
@@ -62,15 +79,15 @@ bool IGA::getJSON(JsonObject &doc) {
 
     JsonArray dataArray = doc.createNestedArray("IGA");
 
-    JsonObject dataSet = dataArray.createNestedObject(); // First data set
-    dataSet["name"] = "CO2";
-    dataSet["value"] = data[0];
-    dataSet["unit"] = "ppm";
-
-    dataArray.add(dataSet); //Subsequent data sets
+    JsonObject dataSet = dataArray.createNestedObject();  // First data set
     dataSet["name"] = "TVOC";
     dataSet["value"] = data[1];
     dataSet["unit"] = "ppb";
+
+    dataArray.add(dataSet);  // Subsequent data sets
+    dataSet["name"] = "CO2";
+    dataSet["value"] = data[0];
+    dataSet["unit"] = "ppm";
 
     return true;
 }
