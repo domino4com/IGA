@@ -84,7 +84,7 @@ bool IGA::getJSON(JsonObject &doc) {
     dataSet["value"] = data[1];
     dataSet["unit"] = "ppb";
 
-    dataArray.add(dataSet);  // Subsequent data sets
+    dataSet = dataArray.createNestedObject();   // Subsequent data sets
     dataSet["name"] = "CO2";
     dataSet["value"] = data[0];
     dataSet["unit"] = "ppm";
