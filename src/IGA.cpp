@@ -59,7 +59,7 @@ bool IGA::getData(uint16_t &co2, uint16_t &tvoc) {
     return true;  // Return true for successful read (add error handling if needed)
 }
 
-bool IGA::getJSON(JsonObject &doc) {
+bool IGA::getJSON(JsonDocument &doc) {
     if (!wireping(SGP30_I2C_ADDRESS)) {
         uninitialized = true;
         return false;
@@ -77,14 +77,14 @@ bool IGA::getJSON(JsonObject &doc) {
     if (!readData(data, 2))
         return false;
 
-    JsonArray dataArray = doc.createNestedArray("IGA");
+    JsonArray dataArray = doc["IGA"].to<JsonArray>();
 
-    JsonObject dataSet = dataArray.createNestedObject();  // First data set
+    JsonObject dataSet = dataArray.add<JsonObject>();  // First data se
     dataSet["name"] = "TVOC";
     dataSet["value"] = data[1];
     dataSet["unit"] = "ppb";
 
-    dataSet = dataArray.createNestedObject();   // Subsequent data sets
+    dataSet = dataArray.add<JsonObject>();  // Subsequent data sets
     dataSet["name"] = "CO2";
     dataSet["value"] = data[0];
     dataSet["unit"] = "ppm";

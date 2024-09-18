@@ -1,7 +1,6 @@
 #ifndef IGA_H
 #define IGA_H
 
-#include "xbm.h"
 #include <Wire.h>
 #include <ArduinoJson.h>
 
@@ -11,7 +10,7 @@ public:
     IGA();
     bool begin();
     bool getData(uint16_t &co2, uint16_t &tvoc);
-    bool getJSON(JsonObject &doc);
+    bool getJSON(JsonDocument &doc);
 
 private:
     void writeCommand(uint16_t command);
