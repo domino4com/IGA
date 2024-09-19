@@ -11,7 +11,8 @@ IGA::IGA() {
 }
 
 bool IGA::begin() {
-    Wire.begin();
+    // Wire.begin();
+    if (!wireping(SGP30_I2C_ADDRESS)) return false;
     // Initialize the SGP30 sensor
     writeCommand(SGP30_INIT_CMD);
     delay(100);
@@ -67,7 +68,6 @@ bool IGA::getJSON(JsonDocument &doc) {
     if (uninitialized) {
         uninitialized = false;
         begin();
-        Serial.println("IGA: First time");
     }
 
     writeCommand(SGP30_MEASURE_CMD);

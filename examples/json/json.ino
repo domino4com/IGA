@@ -17,6 +17,13 @@ void setup() {
 
     Wire.setPins(I2C_SDA, I2C_SCL);
     Wire.begin();
+
+    if (!input.begin()) {
+        Serial.println("Failed to initialize IGA.");
+        while (1) delay(10);
+    } else {
+        Serial.println("IGA initialized.");
+    }
 }
 
 void loop() {
